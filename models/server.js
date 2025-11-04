@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
+const setupSwagger = require('../config/swagger');
 
 class Server {
     constructor() {
@@ -8,6 +9,7 @@ class Server {
         this.port = process.env.PORT;
         this.middlewares();
         this.routes();
+        this.swagger();
     }
 
     middlewares() {
@@ -20,9 +22,14 @@ class Server {
         this.app.use('/api/usuarios', require('../routes/usuarios'));
     }
 
+    swagger() {
+        setupSwagger(this.app);
+    }
+
     listen() {
         this.app.listen(this.port, () => {
-            console.log(`Server listening on port ${this.port}`);
+            console.log(`> Server ejecutándose en el puerto: ${this.port}`);
+            console.log(`> Documentación Swagger disponible en http://localhost:${this.port}/api-docs`);
         });
     }
 }

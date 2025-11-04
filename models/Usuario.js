@@ -19,7 +19,7 @@ const Usuario = sequelize.define('usuario', {
         allowNull: false,
     },
 },{
-    timestamps: false // Deshabilita createdAt y updatedAt
+    timestamps: false
 });
 
 module.exports = Usuario;
